@@ -17,6 +17,13 @@ class AuthController extends Controller
     }
     public function register(Request $request){
         $data = $request->only('type', 'unique_identifier', 'password');
+        $exists = User::where("unique_identifier", '=', $request->input("unique_identifier"))->first();
+        if ($exists){
+            return response()->json([
+                "status"=>"Exists",
+                "message"=>"User already exists!"
+            ], 403);
+        }
         $validate = Validator::make($data,
             [
                 'type'=>'required',
