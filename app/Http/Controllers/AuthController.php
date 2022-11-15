@@ -63,7 +63,7 @@ class AuthController extends Controller
         if ($validate->fails()){
             return response()->json([
                 "Error" => $validate->messages()
-            ], 400);
+            ]);
         }
         $credentials = $request->only('unique_identifier', 'password');
         $token = Auth::attempt($credentials);

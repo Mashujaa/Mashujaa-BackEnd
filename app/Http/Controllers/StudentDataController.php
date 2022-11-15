@@ -38,7 +38,9 @@ class StudentDataController extends Controller
                 "Error" => $validate->messages()
             ]);
         }
-        
+        // return response()->json([
+        //     "The error is "
+        // ]);
         $new_profile = $user->student()->create([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
@@ -56,7 +58,7 @@ class StudentDataController extends Controller
             "status" => "success",
             "message" => "Student profile successfully added",
             "profile" => [
-                "Student Data" => $new_profile
+                // "Student Data" => $new_profile
             ]
 
         ], 201);        
