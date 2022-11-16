@@ -5,6 +5,8 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory;
+use App\Models\AllCoursesModel;
+use App\Models\AllUnitsModel;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -20,6 +22,8 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        $courses = new AllCoursesModel();
+        $units = new AllUnitsModel();
         $all_data = [
             "Software Engineering" => "212",
             "Information Technology" => "213",
@@ -98,7 +102,7 @@ class DatabaseSeeder extends Seeder
         $semester = 0;
         $course_id = 0;
         foreach($all_data as $key=>$value){
-            \App\Models\AllCoursesModel::factory()->create(
+            $courses->create(
                 [
                     "course_name" => $key,
                     "course_code" => $value,
@@ -110,7 +114,7 @@ class DatabaseSeeder extends Seeder
                 foreach($row as $row_ ){
                     $semester += 1;
                   foreach($row_ as $key_ => $val_){
-                    \App\Models\AllUnitsModel::factory()->create(
+                    $units->create(
                         [
                             "unit_name"=>$val_,
                             "unit_code"=>$key_,
