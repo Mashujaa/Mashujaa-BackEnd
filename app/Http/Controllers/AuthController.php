@@ -23,7 +23,7 @@ class AuthController extends Controller
     public function register(Request $request){
         $data = $request->only('unique_identifier', 'password');
         if ($request->input("unique_identifier")[0]== "L"){
-            $isGiven = LecturerNo::where("employee_no", "=", $request->input("unique_identifier"))->first();
+            $isGiven = LecturerNo::where("employee_no", "=", $request->input("unique_identifier"));
             if(!$isGiven){
                 return response()->json([
                     $isGiven,
@@ -32,7 +32,7 @@ class AuthController extends Controller
                 ]);
             }
         }else if($request->input("unique_identifier")[0]== "S"){           
-            $isGiven = StudentAdmNo::where("student_no", "=", $request->input("unique_identifier"))->first();
+            $isGiven = StudentAdmNo::where("student_no", "=", $request->input("unique_identifier"));
             if(!$isGiven){
                 return response()->json([
                     "status"=>"error",
