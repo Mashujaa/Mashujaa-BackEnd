@@ -22,7 +22,7 @@ class AuthController extends Controller
     }
     public function register(Request $request){
         $data = $request->only('unique_identifier', 'password');
-        if ($request->only("unique_identifier")[0]== "L"){
+        if ($request->input("unique_identifier")[0]== "L"){
             $isGiven = LecturerNo::where("employee_no", "=", $request->only("unique_identifier"));
             if(!$isGiven){
                 return response()->json([
@@ -30,10 +30,10 @@ class AuthController extends Controller
                     "message"=>"Lecturer Number Does Not Exist"
                 ]);
             }
-        }else if($request->only("unique_identifier")[0]== "S"){
-            return response()->json([
-                "Errot"
-            ]);
+        }else if($request->input("unique_identifier")[0]== "S"){
+            // return response()->json([
+            //     "Errot"
+            // ]);
             $isGiven = StudentAdmNo::where("student_no", "=", $request->only("unique_identifier"));
             if(!$isGiven){
                 return response()->json([
