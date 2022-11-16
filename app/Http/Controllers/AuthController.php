@@ -31,6 +31,9 @@ class AuthController extends Controller
                 ]);
             }
         }else if($request->only("unique_identifier")[0]== "S"){
+            return response()->json([
+                "Errot"
+            ]);
             $isGiven = StudentAdmNo::where("student_no", "=", $request->only("unique_identifier"));
             if(!$isGiven){
                 return response()->json([
