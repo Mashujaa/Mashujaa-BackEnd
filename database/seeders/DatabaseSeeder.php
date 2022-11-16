@@ -96,6 +96,7 @@ class DatabaseSeeder extends Seeder
         ];
         $year = 0;
         $semester = 0;
+        $course_id = 0;
         foreach($all_data as $key=>$value){
             \App\Models\AllCoursesModel::factory()->create(
                 [
@@ -103,7 +104,7 @@ class DatabaseSeeder extends Seeder
                     "course_code" => $value,
                 ]                
             );
-            
+            $course_id+=1;
             foreach($all_units as $row){
                 $year += 1;   
                 foreach($row as $row_ ){
@@ -114,7 +115,8 @@ class DatabaseSeeder extends Seeder
                             "unit_name"=>$val_,
                             "unit_code"=>$key_,
                             "year" => $year,
-                            "semester"=>$semester
+                            "semester"=>$semester,
+                            "course_id"=>$course_id
                         ]
                     );
                   }
