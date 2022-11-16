@@ -38,9 +38,9 @@ class StudentDataController extends Controller
                 "Error" => $validate->messages()
             ]);
         }
-        return response()->json([
-            "The error is 1"
-        ]);
+        // return response()->json([
+        //     "The error is 1"
+        // ]);
         $current_student = $userU->student();
         return response()->json([
             "The error is 2",
