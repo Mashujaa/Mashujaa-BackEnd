@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Student;
 use App\Models\AllCoursesModel;
 use App\Models\AllUnitsModel;
+use App\Models\Courses;
 
 class StudentDataController extends Controller
 {
@@ -92,5 +93,15 @@ class StudentDataController extends Controller
         $new_course = $current_student->course()->create([
             "course_id" => $course->id
         ]);
+        $this->registerUnits();
+    }
+    public function registerUnits(){
+        $user = AUth::user();
+        $course = Courses::where("student_id", "=", $user->student->student_id)->first();
+        $new_unit = $course->units()->create(
+            [
+                
+            ]
+        );
     }
 }
