@@ -42,11 +42,11 @@ class StudentDataController extends Controller
         //     "The error is 1"
         // ]);
         $current_student = $userU->student();
-        return response()->json([
-            "The error is 2",
-            $current_student,
-            $userU
-        ]);
+        // return response()->json([
+        //     "The error is 2",
+        //     $current_student,
+        //     $userU
+        // ]);
         $new_profile = $current_student->create([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
