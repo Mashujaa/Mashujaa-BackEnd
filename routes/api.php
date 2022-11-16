@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 Use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StudentDataController;
 use App\Http\Controllers\CoursesController;
+use App\Http\Controllers\EmployeeInfoController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -56,4 +57,9 @@ Route::group([
     Route::post('courses', [CoursesController::class, 'getCourse']);
     Route::post('all/courses', [CoursesController::class, 'allCourses']);
 });
-
+Route::group([
+    "middleware"=>"api",
+    "prefix"=>"add"
+], function($routes){
+    Route::post('employee-profile', [EmployeeInfoController::class, 'craete_lecturer_details']);
+});
