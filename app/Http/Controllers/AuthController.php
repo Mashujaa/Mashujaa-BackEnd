@@ -107,7 +107,7 @@ class AuthController extends Controller
         }else if($request->input("unique_identifier")[0]== "S"){           
             $isGiven = StudentAdmNo::where("student_no", "=", $request->input("unique_identifier"));
             if($isGiven){
-               $data = Student::where("user_id", '=', $user->id)->first();
+               $data = $user->student;
 
             }
             
