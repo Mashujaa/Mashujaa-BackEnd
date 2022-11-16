@@ -90,6 +90,9 @@ class StudentDataController extends Controller
         $course_code = substr(explode("/", $user->unique_identifier)[0], 2);
         $course = AllCoursesModel::where("course_code", "=",$course_code)->first();        
         $current_student = Student::where("student_id", "=", $user->student->student_id)->first();        
+        return response()->json([
+            "message"=>$current_student
+        ]);
         $new_course = $current_student->course()->create([
             "course_id" => $course->id
         ]);
@@ -106,7 +109,7 @@ class StudentDataController extends Controller
             [
                 "unit_id"=>1
             ]
-            
+
         );
     }
 }
