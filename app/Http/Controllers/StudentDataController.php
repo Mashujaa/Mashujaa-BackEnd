@@ -106,6 +106,7 @@ class StudentDataController extends Controller
             [
                 "unit_id"=>1
             ]
+            
         );
     }
 }
