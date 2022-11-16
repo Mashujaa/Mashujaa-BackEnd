@@ -44,7 +44,8 @@ class StudentDataController extends Controller
         $current_student = $userU->student();
         return response()->json([
             "The error is 2",
-            $current_student
+            $current_student,
+            $userU
         ]);
         $new_profile = $current_student->create([
             'first_name' => $request->input('first_name'),
