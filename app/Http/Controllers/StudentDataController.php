@@ -15,7 +15,7 @@ class StudentDataController extends Controller
     }
     public function add_student_details(Request $request){
         
-        $user = Auth::user();
+        $userU = Auth::user();
         
         $data = $request->only('first_name', 'last_name',
         'national_id', 'birth_date',
@@ -41,7 +41,8 @@ class StudentDataController extends Controller
         // return response()->json([
         //     "The error is "
         // ]);
-        $new_profile = $user->student->create([
+        
+        $new_profile = $userU->student()->create([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
             'national_id' => $request->input('national_id'),
