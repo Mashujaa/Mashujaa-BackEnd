@@ -64,7 +64,7 @@ class StudentDataController extends Controller
             'postal/zipcode' => $request->input('postal/zipcode'),
             'telephone_number' => $request->input('telephone_number')
         ]);
-        $this->registerCourse();
+        
         return response()->json([
             "status" => "success",
             "message" => "Student profile successfully added",

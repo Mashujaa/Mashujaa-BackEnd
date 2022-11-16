@@ -87,6 +87,18 @@ class AuthController extends Controller
                 "Error" => $validate->messages()
             ]);
         }
+        $user = Auth::user();
+        if ($request->input("unique_identifier")[0]== "L"){
+            $isGiven = LecturerNo::where("employee_no", "=", $request->input("unique_identifier"));
+            if($isGiven){
+               $data = $user->employee;
+            }
+        }else if($request->input("unique_identifier")[0]== "S"){           
+            $isGiven = StudentAdmNo::where("student_no", "=", $request->input("unique_identifier"));
+            if($isGiven){
+               $data = $user->student;
+            }
+        }
         $credentials = $request->only('unique_identifier', 'password');
         $token = Auth::attempt($credentials);
         if (!$token){
@@ -94,13 +106,14 @@ class AuthController extends Controller
                 "status" => "Error",
                 "message" => "Unauthorized",
                 'token' => $token
+                
             ], 401);
         }
-        $user = Auth::user();
+        
         return response()->json([
             "status" => "success",
             "message" => ucwords($request->input('type'))." authenticated successfully",
-            "user" => $user,
+            "data" => $data,
             "authorization" => [
                 "token" => $token,
                 "type" => "bearer"
