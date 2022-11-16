@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
             "SC212/0070/2019",
         ];
         $stud = new StudentAdmNo();
-        for($i = 0; count($data); $i++){
+        for($i = 0; $i<count($data); $i++){
             $stud->create(
                 [
                     "student_no"=>$data[$i]
@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
             "LE213/2307/2020",
         ];
         $emp = new LecturerNo();
-        for ($i = 0; count($data_emp); $i++){
+        for ($i = 0; $i<count($data_emp); $i++){
             $emp->create(
                 [
                     "employee_no" => $data_emp[$i]
