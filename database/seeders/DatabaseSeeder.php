@@ -141,7 +141,7 @@ class DatabaseSeeder extends Seeder
         $course_id = 0;
         
         $keys = array_keys($all_data);
-        for($x = 0; count($all_data); $x++){
+        for($x = 0; $x<count($all_data); $x++){
             $courses->create(
                 [
                     "course_name" => $keys[$x],
