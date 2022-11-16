@@ -7,6 +7,8 @@ use Illuminate\Database\Seeder;
 use Faker\Factory;
 use App\Models\AllCoursesModel;
 use App\Models\AllUnitsModel;
+use App\Models\LecturerNo;
+use App\Models\StudentAdmNo;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -22,6 +24,42 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        $data = [
+            "SC212/0067/2020",
+            "SC212/0068/2021",
+            "SC213/0067/2020",
+            "SC213/0067/2020",
+            "SC214/0067/2020",
+            "SC214/0067/2020",
+            "SC212/0069/2022",
+            "SC212/0070/2019",
+        ];
+        $stud = new StudentAdmNo();
+        for($i = 0; count($data); $i++){
+            $stud->create(
+                [
+                    "student_no"=>$data[$i]
+                ]
+            );
+        }
+        $data_emp = [
+            "LE213/2300/2020",
+            "LE213/2301/2020",
+            "LE213/2302/2021",
+            "LE213/2303/2022",
+            "LE213/2304/2021",
+            "LE213/2305/2021",
+            "LE213/2306/2021",
+            "LE213/2307/2020",
+        ];
+        $emp = new LecturerNo();
+        for ($i = 0; count($data_emp); $i++){
+            $emp->create(
+                [
+                    "employee_no" => $data_emp[$i]
+                ]
+            );
+        }
         $courses = new AllCoursesModel();
         $units = new AllUnitsModel();
         $all_data = [
