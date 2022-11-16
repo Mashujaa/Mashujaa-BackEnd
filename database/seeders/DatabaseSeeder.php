@@ -142,6 +142,9 @@ class DatabaseSeeder extends Seeder
         
         $keys = array_keys($all_data);
         for($x = 0; $x<count($all_data); $x++){
+            if($x > 1){
+                break;
+            }
             $courses->create(
                 [
                     "course_name" => $keys[$x],
@@ -154,6 +157,7 @@ class DatabaseSeeder extends Seeder
               $semester = 0;
               for($y = 0; $y < count($all_units[$i]); $y++){
                   $semester += 1;
+                  
                   foreach($all_units[$i][$y] as $key => $value){
                         $units->create([
                             "unit_name"=>$value,
