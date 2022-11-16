@@ -140,14 +140,15 @@ class DatabaseSeeder extends Seeder
         $semester = 0;
         $course_id = 0;
         
-        foreach($all_data as $key=>$value){
+        $keys = array_keys($all_data);
+        for($x = 0; count($all_data); $x++){
             $courses->create(
                 [
-                    "course_name" => $key,
-                    "course_code" => $value,
+                    "course_name" => $keys[$x],
+                    "course_code" => $all_data[$keys[$x]],
                 ]                
             );
-            $course_id+=1;
+            $course_id+=1;                    
             for ($i = 0;$i<count($all_units);$i++){
                 $year += 1;
               $semester = 0;
