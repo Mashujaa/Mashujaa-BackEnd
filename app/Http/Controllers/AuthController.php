@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\LecturerNo;
 use App\Models\StudentAdmNo;
+use App\Models\AllCoursesModel;
+use App\Models\Courses;
+use App\Models\Student;
 
 class AuthController extends Controller
 {
@@ -120,4 +123,5 @@ class AuthController extends Controller
             "message" => "Successfully logged out"
         ]);
     }
+    
 }

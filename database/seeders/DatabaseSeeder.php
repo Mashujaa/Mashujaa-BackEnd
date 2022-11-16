@@ -149,7 +149,8 @@ class DatabaseSeeder extends Seeder
             $course_id+=1;
             foreach($all_units as $row){
                 $year += 1;   
-                foreach($row as $row_ ){
+                $semester = 0;
+                foreach($row as $row_ ){                    
                     $semester += 1;
                   foreach($row_ as $key_ => $val_){
                     $units->create(

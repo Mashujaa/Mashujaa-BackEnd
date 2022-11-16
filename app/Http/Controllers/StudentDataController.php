@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\Student;
+use App\Models\AllCoursesModel;
+use App\Models\AllUnitsModel;
+
 class StudentDataController extends Controller
 {
     public function __construct()
@@ -60,6 +63,7 @@ class StudentDataController extends Controller
             'postal/zipcode' => $request->input('postal/zipcode'),
             'telephone_number' => $request->input('telephone_number')
         ]);
+        $this->registerCourse();
         return response()->json([
             "status" => "success",
             "message" => "Student profile successfully added",
@@ -78,6 +82,15 @@ class StudentDataController extends Controller
     public function send_student_data_all(){
         return response()->json([
             "students" => Student::all()
+        ]);
+    }
+    public function registerCourse(){
+        $user = Auth::user();        
+        $course_code = substr(explode("/", $user->unique_identifier)[0], 2);
+        $course = AllCoursesModel::where("course_code", "=",$course_code)->first();        
+        $current_student = Student::where("student_id", "=", $user->student->student_id)->first();        
+        $new_course = $current_student->course()->create([
+            "course_id" => $course->id
         ]);
     }
 }
