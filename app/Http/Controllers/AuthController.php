@@ -54,9 +54,9 @@ class AuthController extends Controller
         ], 201);                        
     }
     public function login(Request $request){
-        $data = $request->only('unique_identifier', 'type', 'password');
+        $data = $request->only('unique_identifier',  'password');
         $validate = Validator::make($data, [
-            'type' => 'required',
+            
             'unique_identifier' => 'required',
             'password' => 'required'
         ]);
