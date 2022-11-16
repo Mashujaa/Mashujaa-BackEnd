@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('units', function (Blueprint $table) {
             $table->id();
-            $table->string("unit_code");
-            $table->string("unit_title");
+            $table->string("unit_id");
+            // $table->string("unit_t");
             $table->foreignId("course_id");
             $table->timestamps();
         });

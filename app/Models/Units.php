@@ -10,8 +10,7 @@ class Units extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'unit_code',
-        'unit_title'
+        "unit_id"
     ];
     public function course():BelongsTo{
         return $this->belongsTo(Courses::class, );
