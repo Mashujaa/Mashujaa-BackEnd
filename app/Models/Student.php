@@ -24,7 +24,7 @@ class Student extends Model
         'telephone_number'
     ];
     public function user():BelongsTo{
-        return $this->belongsTo(User::class, "user_id");
+        return $this->belongsTo(User::class, );
     }
     public function course():HasOne{
         return $this->hasOne(Courses::class, "student_id", 'student_id');
