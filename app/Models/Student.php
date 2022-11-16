@@ -27,6 +27,6 @@ class Student extends Model
         return $this->belongsTo(User::class, );
     }
     public function course():HasOne{
-        return $this->hasOne(Courses::class,);
+        return $this->hasOne(Courses::class,"student_id");
     }
 }
