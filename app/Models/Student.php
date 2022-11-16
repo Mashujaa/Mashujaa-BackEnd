@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Student extends Model
 {
     use HasFactory;
-    protected $primaryKey = "student_id";
+    
     protected $fillable = [
         'first_name',
         'last_name',
@@ -29,7 +29,7 @@ class Student extends Model
         return $this->belongsTo(User::class, );
     }
     public function course():HasOne{
-        return $this->hasOne(Courses::class, "student_id", "student_id");
+        return $this->hasOne(Courses::class, );
 
     }
 }
