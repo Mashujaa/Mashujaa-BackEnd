@@ -38,11 +38,15 @@ class StudentDataController extends Controller
                 "Error" => $validate->messages()
             ]);
         }
-        // return response()->json([
-        //     "The error is "
-        // ]);
-        
-        $new_profile = $userU->student()->create([
+        return response()->json([
+            "The error is 1"
+        ]);
+        $current_student = $userU->student();
+        return response()->json([
+            "The error is 2",
+            $current_student
+        ]);
+        $new_profile = $current_student->create([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
             'national_id' => $request->input('national_id'),
