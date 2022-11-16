@@ -26,14 +26,12 @@ class AuthController extends Controller
             $isGiven = LecturerNo::where("employee_no", "=", $request->input("unique_identifier"))->first();
             if(!$isGiven){
                 return response()->json([
+                    $isGiven,
                     "status"=>"error",
                     "message"=>"Lecturer Number Does Not Exist"
                 ]);
             }
-        }else if($request->input("unique_identifier")[0]== "S"){
-            // return response()->json([
-            //     "Errot"
-            // ]);
+        }else if($request->input("unique_identifier")[0]== "S"){           
             $isGiven = StudentAdmNo::where("student_no", "=", $request->input("unique_identifier"))->first();
             if(!$isGiven){
                 return response()->json([

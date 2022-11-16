@@ -93,14 +93,18 @@ class StudentDataController extends Controller
         $new_course = $current_student->course()->create([
             "course_id" => $course->id
         ]);
-        $this->registerUnits();
+        $this->registerUnits($course);
     }
-    public function registerUnits(){
+    public function registerUnits($code){
         $user = AUth::user();
         $course = Courses::where("student_id", "=", $user->student->student_id)->first();
+        $units = AllUnitsModel::where("course_id", "=", $code->id)->all();
+        return response()->json([
+            $units
+        ]);
         $new_unit = $course->units()->create(
             [
-                
+                "unit_id"=>1
             ]
         );
     }
