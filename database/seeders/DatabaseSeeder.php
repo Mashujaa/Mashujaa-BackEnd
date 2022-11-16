@@ -139,6 +139,7 @@ class DatabaseSeeder extends Seeder
         $year = 0;
         $semester = 0;
         $course_id = 0;
+        
         foreach($all_data as $key=>$value){
             $courses->create(
                 [
@@ -147,27 +148,23 @@ class DatabaseSeeder extends Seeder
                 ]                
             );
             $course_id+=1;
-            foreach($all_units as $row){
-                $year += 1;   
-                $semester = 0;
-                foreach($row as $row_ ){                    
-                    
-                    $semester += 1;
-                  foreach($row_ as $key_ => $val_){
-                    
-                    $units->create(
-                        [
-                            "unit_name"=>$val_,
-                            "unit_code"=>$key_,
+            for ($i = 0;$i<count($all_units);$i++){
+                $year += 1;
+              $semester = 0;
+              for($y = 0; $y < count($all_units[$i]); $y++){
+                  $semester += 1;
+                  foreach($all_units[$i][$y] as $key => $value){
+                        $units->create([
+                            "unit_name"=>$value,
+                            "unit_code"=>$key,
                             "year" => $year,
-                            "semester"=>$semester,
-                            "course_id"=>$course_id
-                        ]
-                    );
-                  }
-                }
+                            "semester" => $semester,
+                            "course_id"=> $course_id
+                        ]);                                          
+                  }                  
               }
         }
+    }
 
         
     }
