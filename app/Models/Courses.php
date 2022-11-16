@@ -15,10 +15,10 @@ class Courses extends Model
         'course_title'
     ];
     public function student() : BelongsTo{
-        return $this->belongsTo(Student::class, "student_id");
+        return $this->belongsTo(Student::class,);
     }
     public function units() : HasOne {
-        return $this->hasOne(Units::class, "course_id", "course_id");
+        return $this->hasOne(Units::class, );
     }
 }
 

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use App\Models\LecturerNo;
+use App\Models\StudentAdmNo;
 
 class AuthController extends Controller
 {
@@ -16,17 +18,27 @@ class AuthController extends Controller
         $this->middleware('auth:api', ['except'=>['register', 'login']]);
     }
     public function register(Request $request){
-        $data = $request->only('type', 'unique_identifier', 'password');
-        $exists = User::where("unique_identifier", '=', $request->input("unique_identifier"))->first();
-        if ($exists){
-            return response()->json([
-                "status"=>"Exists",
-                "message"=>"User already exists!"
-            ], 403);
+        $data = $request->only('unique_identifier', 'password');
+        if (strtoupper($request->only("unique_identifier")[0])== "L"){
+            $isGiven = LecturerNo::where("employee_no", "=", $request->only("unique_identifier"))->first();
+            if(!$isGiven){
+                return response()->json([
+                    "status"=>"error",
+                    "message"=>"Lecturer Number Does Not Exist"
+                ]);
+            }
+        }else if(strtoupper($request->only("unique_identifier")[0])== "S"){
+            $isGiven = StudentAdmNo::where("student_no", "=", $request->only("unique_identifier"))->first();
+            if(!$isGiven){
+                return response()->json([
+                    "status"=>"error",
+                    "message"=>"Student Number Does Not Exist"
+                ]);
+            }
         }
+        
         $validate = Validator::make($data,
-            [
-                'type'=>'required',
+            [                
                 'unique_identifier' => 'required',
                 'password' => 'required'
             ]
@@ -36,7 +48,13 @@ class AuthController extends Controller
                 "Error" => $validate->messages()
             ], 400);
         }
-    
+        $exists = User::where("unique_identifier", '=', $request->input("unique_identifier"))->first();
+        if ($exists){
+            return response()->json([
+                "status"=>"Exists",
+                "message"=>"User already exists!"
+            ], 403);
+        }
         
         $user = User::create([
             'unique_identifier' => $request->input('unique_identifier'),
@@ -47,7 +65,7 @@ class AuthController extends Controller
             "status" => "success",
             "message" => ucwords($request->input("type"))." created successfully",
             "user" => $user,
-            "authorisation" =>[
+            "authorization" =>[
                 "token" => $token,
                 "type" => "bearer"
             ]
