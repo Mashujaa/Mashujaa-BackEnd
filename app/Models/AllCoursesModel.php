@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class AllCoursesModel extends Model
 {
     use HasFactory;
+   
     protected $fillabele = [
         "course_name",
         "course_code"
